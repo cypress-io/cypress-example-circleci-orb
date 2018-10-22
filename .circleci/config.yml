@@ -1,0 +1,10 @@
+version: 2.1
+orbs:
+  cypress: cypress/cypress@0.0.1
+
+jobs:
+  deploy:
+    executor: cypress/default
+    steps:
+      - cypress/e2e:
+          record: false
