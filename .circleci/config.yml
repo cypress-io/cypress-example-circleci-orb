@@ -1,11 +1,68 @@
 version: 2.1
+
+# define inline orbs for reusable configuration
+# later we will just import published Cypress orb
 orbs:
-  # https://github.com/CircleCI-Public/config-preview-sdk/blob/master/docs/using-orbs.md#semantic-versioning-in-orbs
-  cypress: cypress/cypress@volatile
+  # environments for running jobs and commands
+  executors:
+    default:
+      parameters:
+        # in the future we can add Cypress version?
+        node:
+          type: string
+          default: "10"
+      docker:
+        - image: cypress/base:<< parameters.node >>
+
+  # reusable commands
+  commands:
+    install:
+      description: "Install NPM dependencies"
+      steps:
+        # it would be nice to vary this command based on presence of "package-lock.json"
+        # and also allow using yarn or pnpm
+        - run:
+            name: "Npm CI"
+            command: "npm ci"
+    e2e:
+      description: "Runs Cypress end-to-end tests"
+      parameters:
+        record:
+          type: boolean
+          default: false
+          description: Record results on Cypress Dashboard
+      steps:
+        - run:
+            name: Run Cypress tests
+            # ? how to use parameters.record to insert --record
+            # command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+            command: "npx cypress run"
+
+jobs:
+  test:
+    docker:
+      - image: cypress/base:10
+    steps:
+      - checkout
+      - run:
+          name: a test
+          command: echo Passed
 
 workflows:
-  run-e2e-tests:
+  version: 2
+  build:
     jobs:
-      - cypress/install
-      - cypress/e2e:
-          record: false
+      - test
+
+# if we switch to published Cypress orb then things become simpler
+# version: 2.1
+# orbs:
+#   # https://github.com/CircleCI-Public/config-preview-sdk/blob/master/docs/using-orbs.md#semantic-versioning-in-orbs
+#   cypress: cypress/cypress@volatile
+
+# workflows:
+#   run-e2e-tests:
+#     jobs:
+#       - cypress/install
+#       - cypress/e2e:
+#           record: false
