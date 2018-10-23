@@ -89,12 +89,16 @@ orbs:
             type: boolean
             default: false
             description: Test balancing using Cypress Dashboard, see https://on.cypress.io/parallelization
+          parallelism:
+            type: string
+            default: "1"
+            description: Number of Circle machines to use for load balancing (requires "parallel" parameter set to true)
           group:
             type: string
             default: "default group"
             description: Test group name when recording on the dashboard
         executor: default
-        parallelism: 2
+        parallelism: <<parameters.parallelism>>
         steps:
           - checkout
           - install
@@ -112,6 +116,7 @@ workflows:
           group: "all tests"
           record: true
           parallel: true
+          parallelism: "2"
 
 # if we switch to published Cypress orb then things become simpler
 # version: 2.1
