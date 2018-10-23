@@ -74,11 +74,17 @@ orbs:
 
       e2e:
         # note: this job includes code checkout
+        parameters:
+          record:
+            type: boolean
+            default: false
+            description: Record results on Cypress Dashboard
         executor: default
         steps:
           - checkout
           - install
-          - e2e
+          - e2e:
+              record: <<parameters.record>>
 
 # and now our workflow that uses Cypress orb commands
 workflows:
