@@ -35,7 +35,7 @@ orbs:
           - run:
               name: "Npm CI"
               command: "npm ci"
-          - run: npm run cy:verify
+          - run: npx cypress verify
           # save new cache folder if needed
           - save_cache:
               key: cache-{{ .Branch }}-{{ checksum "package.json" }}
