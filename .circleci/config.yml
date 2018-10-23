@@ -60,9 +60,7 @@ orbs:
               at: ~/
           - run:
               name: Run Cypress tests
-              # ? how to use parameters.record to insert --record
-              # command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
-              command: "npx cypress run"
+              command: "npx cypress run <<# parameters.record >> --record <</ parameters.record >>"
 
     # jobs defined by the orb
     jobs:
