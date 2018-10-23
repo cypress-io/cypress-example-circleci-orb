@@ -92,6 +92,7 @@ workflows:
     jobs:
       - cypress/hello
       - cypress/e2e
+          record: true
 
 # if we switch to published Cypress orb then things become simpler
 # version: 2.1
