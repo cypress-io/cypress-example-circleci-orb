@@ -1,111 +1,113 @@
 version: 2.1
+orbs:
+  runner: cypress/runner@dev:0.0.1
 
 # define inline orbs for reusable configuration
 # later we will just import published Cypress orb
-orbs:
-  runner:
-    # environments for running jobs and commands
-    executors:
-      default:
-        parameters:
-          # in the future we can add Cypress version?
-          node:
-            type: string
-            default: "10"
-        docker:
-          - image: cypress/base:<< parameters.node >>
+# orbs:
+#   runner:
+#     # environments for running jobs and commands
+#     executors:
+#       default:
+#         parameters:
+#           # in the future we can add Cypress version?
+#           node:
+#             type: string
+#             default: "10"
+#         docker:
+#           - image: cypress/base:<< parameters.node >>
 
-    # reusable commands
-    commands:
-      hello:
-        parameters:
-          greeting:
-            type: string
-        steps:
-          - run: echo "Hello <<parameters.greeting>>"
+#     # reusable commands
+#     commands:
+#       hello:
+#         parameters:
+#           greeting:
+#             type: string
+#         steps:
+#           - run: echo "Hello <<parameters.greeting>>"
 
-      install:
-        description: "Install NPM dependencies"
-        steps:
-          - restore_cache:
-              keys:
-                - cache-{{ .Branch }}-{{ checksum "package.json" }}
-          # it would be nice to vary this command based on presence of "package-lock.json"
-          # and also allow using yarn or pnpm
-          - run:
-              name: "Npm CI"
-              command: "npm ci"
-          - run: npx cypress verify
-          # save new cache folder if needed
-          - save_cache:
-              key: cache-{{ .Branch }}-{{ checksum "package.json" }}
-              paths:
-                - ~/.npm
-                - ~/.cache
-          - persist_to_workspace:
-              root: ~/
-              paths:
-                - project
-                - .cache/Cypress
+#       install:
+#         description: "Install NPM dependencies"
+#         steps:
+#           - restore_cache:
+#               keys:
+#                 - cache-{{ .Branch }}-{{ checksum "package.json" }}
+#           # it would be nice to vary this command based on presence of "package-lock.json"
+#           # and also allow using yarn or pnpm
+#           - run:
+#               name: "Npm CI"
+#               command: "npm ci"
+#           - run: npx cypress verify
+#           # save new cache folder if needed
+#           - save_cache:
+#               key: cache-{{ .Branch }}-{{ checksum "package.json" }}
+#               paths:
+#                 - ~/.npm
+#                 - ~/.cache
+#           - persist_to_workspace:
+#               root: ~/
+#               paths:
+#                 - project
+#                 - .cache/Cypress
 
-      e2e:
-        description: "Runs Cypress end-to-end tests"
-        parameters:
-          record:
-            type: boolean
-            default: false
-            description: Record results on Cypress Dashboard, see https://on.cypress.io/dashboard-service
-          parallel:
-            type: boolean
-            default: false
-            description: Test balancing using Cypress Dashboard, see https://on.cypress.io/parallelization
-          group:
-            type: string
-            description: Give tests a group name for clarity
-        steps:
-          - attach_workspace:
-              at: ~/
-          - run:
-              name: Run Cypress tests
-              # GOOD EXAMPLE conditional text based on boolean parameter
-              command: "npx cypress run <<# parameters.record >> --record --group '<<parameters.group>>' <</ parameters.record >> <<# parameters.parallel >> --parallel <</ parameters.parallel >>"
+#       e2e:
+#         description: "Runs Cypress end-to-end tests"
+#         parameters:
+#           record:
+#             type: boolean
+#             default: false
+#             description: Record results on Cypress Dashboard, see https://on.cypress.io/dashboard-service
+#           parallel:
+#             type: boolean
+#             default: false
+#             description: Test balancing using Cypress Dashboard, see https://on.cypress.io/parallelization
+#           group:
+#             type: string
+#             description: Give tests a group name for clarity
+#         steps:
+#           - attach_workspace:
+#               at: ~/
+#           - run:
+#               name: Run Cypress tests
+#               # GOOD EXAMPLE conditional text based on boolean parameter
+#               command: "npx cypress run <<# parameters.record >> --record --group '<<parameters.group>>' <</ parameters.record >> <<# parameters.parallel >> --parallel <</ parameters.parallel >>"
 
-    # jobs defined by the orb
-    jobs:
-      hello:
-        executor: default
-        steps:
-          - hello:
-              greeting: "from Cypress Orb"
+#     # jobs defined by the orb
+#     jobs:
+#       hello:
+#         executor: default
+#         steps:
+#           - hello:
+#               greeting: "from Cypress Orb"
 
-      e2e:
-        # note: this job includes code checkout
-        parameters:
-          record:
-            type: boolean
-            default: false
-            description: Record results on Cypress Dashboard, see https://on.cypress.io/dashboard-service
-          parallel:
-            type: boolean
-            default: false
-            description: Test balancing using Cypress Dashboard, see https://on.cypress.io/parallelization
-          parallelism:
-            type: string
-            default: "1"
-            description: Number of Circle machines to use for load balancing (requires "parallel" parameter set to true)
-          group:
-            type: string
-            default: "default group"
-            description: Test group name when recording on the dashboard
-        executor: default
-        parallelism: <<parameters.parallelism>>
-        steps:
-          - checkout
-          - install
-          - e2e:
-              record: <<parameters.record>>
-              parallel: <<parameters.parallel>>
-              group: <<parameters.group>>
+#       e2e:
+#         # note: this job includes code checkout
+#         parameters:
+#           record:
+#             type: boolean
+#             default: false
+#             description: Record results on Cypress Dashboard, see https://on.cypress.io/dashboard-service
+#           parallel:
+#             type: boolean
+#             default: false
+#             description: Test balancing using Cypress Dashboard, see https://on.cypress.io/parallelization
+#           parallelism:
+#             type: string
+#             default: "1"
+#             description: Number of Circle machines to use for load balancing (requires "parallel" parameter set to true)
+#           group:
+#             type: string
+#             default: "default group"
+#             description: Test group name when recording on the dashboard
+#         executor: default
+#         parallelism: <<parameters.parallelism>>
+#         steps:
+#           - checkout
+#           - install
+#           - e2e:
+#               record: <<parameters.record>>
+#               parallel: <<parameters.parallel>>
+#               group: <<parameters.group>>
 
 # and now our workflow that uses Cypress orb commands
 workflows:
@@ -115,7 +117,7 @@ workflows:
       - runner/e2e:
           group: "all tests"
           record: true
-          parallel: true
+          # parallel: true
           # parallelism: "2"
 
 # if we switch to published Cypress orb then things become simpler
