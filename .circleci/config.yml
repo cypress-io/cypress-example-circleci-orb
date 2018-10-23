@@ -54,7 +54,11 @@ orbs:
           record:
             type: boolean
             default: false
-            description: Record results on Cypress Dashboard
+            description: Record results on Cypress Dashboard, see https://on.cypress.io/dashboard-service
+          parallel:
+            type: boolean
+            default: false
+            description: Test balancing using Cypress Dashboard, see https://on.cypress.io/parallelization
           group:
             type: string
             description: Give tests a group name for clarity
@@ -63,7 +67,8 @@ orbs:
               at: ~/
           - run:
               name: Run Cypress tests
-              command: "npx cypress run <<# parameters.record >> --record --group '<<parameters.group>>' <</ parameters.record >>"
+              # GOOD EXAMPLE conditional text based on boolean parameter
+              command: "npx cypress run <<# parameters.record >> --record --group '<<parameters.group>>' <</ parameters.record >> <<# parameters.parallel >> --parallel <</ parameters.parallel >>"
 
     # jobs defined by the orb
     jobs:
@@ -79,17 +84,23 @@ orbs:
           record:
             type: boolean
             default: false
-            description: Record results on Cypress Dashboard
+            description: Record results on Cypress Dashboard, see https://on.cypress.io/dashboard-service
+          parallel:
+            type: boolean
+            default: false
+            description: Test balancing using Cypress Dashboard, see https://on.cypress.io/parallelization
           group:
             type: string
             default: "default group"
             description: Test group name when recording on the dashboard
         executor: default
+        parallelism: 2
         steps:
           - checkout
           - install
           - e2e:
               record: <<parameters.record>>
+              parallel: <<parameters.parallel>>
               group: <<parameters.group>>
 
 # and now our workflow that uses Cypress orb commands
@@ -100,6 +111,7 @@ workflows:
       - cypress/e2e:
           group: "all tests"
           record: true
+          parallel: true
 
 # if we switch to published Cypress orb then things become simpler
 # version: 2.1
