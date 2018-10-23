@@ -17,6 +17,13 @@ orbs:
 
     # reusable commands
     commands:
+      hello:
+        parameters:
+          greeting:
+            type: string
+        steps:
+          - run: echo "Hello <<parameters.greeting>>"
+
       install:
         description: "Install NPM dependencies"
         steps:
@@ -25,6 +32,7 @@ orbs:
           - run:
               name: "Npm CI"
               command: "npm ci"
+
       e2e:
         description: "Runs Cypress end-to-end tests"
         parameters:
@@ -42,13 +50,11 @@ orbs:
     # jobs defined by the orb
     jobs:
       test:
-        docker:
-          - image: cypress/base:10
+        executor: default
         steps:
-          # - checkout
-          - run:
-              name: a test
-              command: echo Passed
+          - checkout
+          - hello:
+              greeting: "there"
 
 workflows:
   build:
