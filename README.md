@@ -9,14 +9,15 @@ I think the user project would simply be
 ```yaml
 version: 2.1
 orbs:
-  cypress: cypress/cypress@1.0.0
+  runner: cypress/runner@1.0.0
 workflows:
   build:
     jobs:
-      - cypress/e2e:
+      - runner/e2e:
           group: “all tests”
           record: true
           parallel: true
+          parallelism: 6
 ```
 
 which is very very simple. If the user does not want recording and just needs tests
@@ -24,11 +25,11 @@ which is very very simple. If the user does not want recording and just needs te
 ```yaml
 version: 2.1
 orbs:
-  cypress: cypress/cypress@1.0.0
+  runner: cypress/runner@1.0.0
 workflows:
   build:
     jobs:
-      - cypress/e2e
+      - runner/e2e
 ```
 
 The hierarchy:

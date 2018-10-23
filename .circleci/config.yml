@@ -3,7 +3,7 @@ version: 2.1
 # define inline orbs for reusable configuration
 # later we will just import published Cypress orb
 orbs:
-  cypress:
+  runner:
     # environments for running jobs and commands
     executors:
       default:
@@ -111,12 +111,12 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/hello
-      - cypress/e2e:
+      - runner/hello
+      - runner/e2e:
           group: "all tests"
           record: true
           parallel: true
-          parallelism: "2"
+          # parallelism: "2"
 
 # if we switch to published Cypress orb then things become simpler
 # version: 2.1
