@@ -63,7 +63,7 @@ orbs:
               at: ~/
           - run:
               name: Run Cypress tests
-              command: "npx cypress run <<# parameters.record >> --record --group <<parameters.group>> <</ parameters.record >>"
+              command: "npx cypress run <<# parameters.record >> --record --group '<<parameters.group>>' <</ parameters.record >>"
 
     # jobs defined by the orb
     jobs:
