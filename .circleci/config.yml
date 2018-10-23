@@ -63,7 +63,7 @@ orbs:
         executor: default
         steps:
           - hello:
-              greeting: "there"
+              greeting: "from Cypress Orb"
 
       e2e:
         executor: default
@@ -74,6 +74,7 @@ orbs:
 workflows:
   build:
     jobs:
+      - cypress/hello
       - cypress/e2e
 
 # if we switch to published Cypress orb then things become simpler
