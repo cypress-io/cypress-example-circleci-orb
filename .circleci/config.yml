@@ -42,6 +42,11 @@ orbs:
               paths:
                 - ~/.npm
                 - ~/.cache
+          - persist_to_workspace:
+              root: ~/
+              paths:
+                - project
+                - .cache/Cypress
 
       e2e:
         description: "Runs Cypress end-to-end tests"
@@ -51,6 +56,8 @@ orbs:
             default: false
             description: Record results on Cypress Dashboard
         steps:
+          - attach_workspace:
+              at: ~/
           - run:
               name: Run Cypress tests
               # ? how to use parameters.record to insert --record
@@ -66,11 +73,14 @@ orbs:
               greeting: "from Cypress Orb"
 
       e2e:
+        # note: this job includes code checkout
         executor: default
         steps:
           - checkout
           - install
+          - e2e
 
+# and now our workflow that uses Cypress orb commands
 workflows:
   build:
     jobs:
