@@ -55,12 +55,15 @@ orbs:
             type: boolean
             default: false
             description: Record results on Cypress Dashboard
+          group:
+            type: string
+            description: Give tests a group name for clarity
         steps:
           - attach_workspace:
               at: ~/
           - run:
               name: Run Cypress tests
-              command: "npx cypress run <<# parameters.record >> --record <</ parameters.record >>"
+              command: "npx cypress run <<# parameters.record >> --record --group <<parameters.group>> <</ parameters.record >>"
 
     # jobs defined by the orb
     jobs:
@@ -77,12 +80,17 @@ orbs:
             type: boolean
             default: false
             description: Record results on Cypress Dashboard
+          group:
+            type: string
+            default: "default group"
+            description: Test group name when recording on the dashboard
         executor: default
         steps:
           - checkout
           - install
           - e2e:
               record: <<parameters.record>>
+              group: <<parameters.group>>
 
 # and now our workflow that uses Cypress orb commands
 workflows:
@@ -90,6 +98,7 @@ workflows:
     jobs:
       - cypress/hello
       - cypress/e2e:
+          group: "all tests"
           record: true
 
 # if we switch to published Cypress orb then things become simpler
