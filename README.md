@@ -10,12 +10,12 @@ This project on CircleCI: checks out code, installs NPM dependencies, runs Cypre
 ```yaml
 version: 2.1
 orbs:
-  runner: cypress/cypress@dev:0.0.1
+  cypress: cypress/cypress@dev:0.0.1
 
 workflows:
   build:
     jobs:
-      - runner/e2e:
+      - cypress/e2e:
           group: "all tests"
           record: true
 ```
@@ -30,3 +30,4 @@ Workflow -> Jobs --> Commands -> define steps
 ## Development
 
 - check if you are correctly using the Cypress orb in [.circleci/config.yml](.circleci/config.yml) file by running `npm run validate`.
+- you can expand all commands from the orb and see how the "processed" [.circleci/config.yml](.circleci/config.yml) looks during the run on CircleCI. Execute `npm run process` to print the processed YAML in the terminal.

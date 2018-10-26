@@ -1,10 +1,10 @@
 version: 2.1
 orbs:
-  runner: cypress/cypress@dev:0.0.1
+  cypress: cypress/cypress@dev:0.0.1
 
 workflows:
   build:
     jobs:
-      - runner/e2e:
+      - cypress/run:
           group: "all tests"
           record: true
