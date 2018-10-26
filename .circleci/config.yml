@@ -6,6 +6,10 @@ workflows:
     jobs:
       - cypress/install
       - cypress/parallel-2x:
+          requires:
+            - cypress/install
           group: "2x"
       - cypress/parallel-3x:
+          requires:
+            - cypress/install
           group: "3x"
