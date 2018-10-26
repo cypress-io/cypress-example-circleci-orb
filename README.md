@@ -11,13 +11,25 @@ This project on CircleCI: checks out code, installs NPM dependencies, runs Cypre
 version: 2.1
 orbs:
   cypress: cypress/cypress@dev:0.0.1
-
 workflows:
   build:
     jobs:
-      - cypress/e2e:
+      # record Cypress tests on the Dashboard
+      - cypress/run:
           group: "all tests"
           record: true
+```
+
+Or you can run without recording on the dashboard
+
+```yaml
+version: 2.1
+orbs:
+  cypress: cypress/cypress@dev:0.0.1
+workflows:
+  build:
+    jobs:
+      - cypress/run
 ```
 
 The hierarchy:
