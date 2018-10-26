@@ -4,7 +4,8 @@ orbs:
 workflows:
   build:
     jobs:
-      # record Cypress tests on the Dashboard
-      - cypress/run:
-          group: "all tests"
-          record: true
+      - cypress/install
+      - cypress/parallel-2x:
+          group: "2x"
+      - cypress/parallel-3x:
+          group: "3x"
