@@ -4,8 +4,11 @@ orbs:
 workflows:
   build:
     jobs:
+      # checks out code and installs dependencies once
       - cypress/install
-      - cypress/parallel-3x:
+      # runs on 3 machines, load balances tests
+      # and records on Cypress Dashboard
+      - cypress/run-3x:
           requires:
             - cypress/install
           group: "3x"
