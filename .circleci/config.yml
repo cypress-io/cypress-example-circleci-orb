@@ -13,3 +13,4 @@ workflows:
           requires:
             - cypress/install
           group: "3x"
+          start: "npm run server"

@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "validate": "circleci config validate .circleci/config.yml",
     "process": "circleci config process .circleci/config.yml",
-    "build": "echo building app 😃"
+    "build": "echo building app 😃",
+    "server": "node ./server"
   },
   "repository": {
     "type": "git",
