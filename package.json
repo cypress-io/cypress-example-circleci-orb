@@ -1,5 +1,5 @@
 {
-  "name": "circleci-orb-test",
+  "name": "cypress-example-circleci-orb",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cypress-io/circleci-orb-test.git"
+    "url": "git+https://github.com/cypress-io/cypress-example-circleci-orb.git"
   },
   "keywords": [],
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com> (https://glebbahmutov.com/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cypress-io/circleci-orb-test/issues"
+    "url": "https://github.com/cypress-io/cypress-example-circleci-orb/issues"
   },
-  "homepage": "https://github.com/cypress-io/circleci-orb-test#readme",
+  "homepage": "https://github.com/cypress-io/cypress-example-circleci-orb#readme",
   "devDependencies": {
     "cypress": "3.1.0",
     "husky": "1.1.2"
