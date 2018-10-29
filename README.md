@@ -2,6 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-circleci-orb.svg?style=svg&circle-token=35ff1103f3c44a79246edd491b0d92169e84976a)](https://circleci.com/gh/cypress-io/cypress-example-circleci-orb) [![Cypress Dashboard](https://img.shields.io/badge/cypress-dashboard-brightgreen.svg)](https://dashboard.cypress.io/#/projects/j35334/runs)
 
+[Cypress CircleCI Orb](https://github.com/cypress-io/circleci-orb)
 
 ## Introduction
 
