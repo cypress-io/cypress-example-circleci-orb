@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  cypress: cypress/cypress@dev:0.0.1
+  cypress: cypress/cypress@0.3.3
 
 # simplest use case - do everything in a single job
 # workflows:
