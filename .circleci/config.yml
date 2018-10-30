@@ -9,8 +9,11 @@ workflows:
           build: "npm run build"
       # runs on 3 machines, load balances tests
       # and records on Cypress Dashboard
-      - cypress/run-3x:
+      - cypress/run:
           requires:
             - cypress/install
+          record: true
+          parallel: true
+          parallelism: 3
           group: "3x"
           start: "npm run server"
