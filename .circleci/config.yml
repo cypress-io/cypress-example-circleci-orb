@@ -1,6 +1,23 @@
 version: 2.1
 orbs:
   cypress: cypress/cypress@dev:0.0.1
+
+# simplest use case - do everything in a single job
+# workflows:
+#   build:
+#     jobs:
+#       - cypress/run
+
+# single job, but build the app and start server
+# workflows:
+#   build:
+#     jobs:
+#       - cypress/run:
+#           build: "npm run build"
+#           start: "npm run server"
+
+# realistic case: install in 1 job,
+# run tests in parallel on several machines after that
 workflows:
   build:
     jobs:
