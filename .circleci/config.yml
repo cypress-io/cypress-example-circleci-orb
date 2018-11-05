@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@dev:pass-executor
+  cypress: cypress-io/cypress@0.4.1
 
 # simplest use case - do everything in a single job
 # workflows:
@@ -9,12 +9,13 @@ orbs:
 #       - cypress/run
 
 # run tests using Chrome browser
-workflows:
-  build:
-    jobs:
-      - cypress/run:
-          executor: cypress/browsers-chrome69
-          browser: chrome
+# (requires custom executor with Cypress docker image that has Chrome installed)
+# workflows:
+#   build:
+#     jobs:
+#       - cypress/run:
+#           executor: cypress/browsers-chrome69
+#           browser: chrome
 
 # single job, but build the app and start server
 # workflows:
@@ -26,19 +27,19 @@ workflows:
 
 # realistic case: install in 1 job,
 # run tests in parallel on several machines after that
-# workflows:
-#   build:
-#     jobs:
-#       # checks out code and installs dependencies once
-#       - cypress/install:
-#           build: "npm run build"
-#       # runs on 3 machines, load balances tests
-#       # and records on Cypress Dashboard
-#       - cypress/run:
-#           requires:
-#             - cypress/install
-#           record: true
-#           parallel: true
-#           parallelism: 3
-#           group: "3x"
-#           start: "npm run server"
+workflows:
+  build:
+    jobs:
+      # checks out code and installs dependencies once
+      - cypress/install:
+          build: "npm run build"
+      # runs on 3 machines, load balances tests
+      # and records on Cypress Dashboard
+      - cypress/run:
+          requires:
+            - cypress/install
+          record: true
+          parallel: true
+          parallelism: 3
+          group: "3x"
+          start: "npm run server"
