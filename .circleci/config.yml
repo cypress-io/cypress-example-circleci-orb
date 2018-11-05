@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@0.4.1
+  cypress: cypress-io/cypress@0.5.0
 
 # simplest use case - do everything in a single job
 # workflows:
@@ -24,6 +24,14 @@ orbs:
 #       - cypress/run:
 #           build: "npm run build"
 #           start: "npm run server"
+
+# run only specific spec file
+# workflows:
+#   build:
+#     jobs:
+#       - cypress/run:
+#           record: false
+#           spec: "cypress/integration/*-b.js"
 
 # realistic case: install in 1 job,
 # run tests in parallel on several machines after that
