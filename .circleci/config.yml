@@ -40,7 +40,7 @@ workflows:
     jobs:
       # checks out code and installs dependencies once
       - cypress/install:
-          build: "npm run build"
+          build: 'npm run build'
       # runs on 3 machines, load balances tests
       # and records on Cypress Dashboard
       - cypress/run:
@@ -49,5 +49,5 @@ workflows:
           record: true
           parallel: true
           parallelism: 3
-          group: "3x"
-          start: "npm run server"
+          group: '3x'
+          start: 'npm run server'
