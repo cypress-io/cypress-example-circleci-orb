@@ -13,7 +13,7 @@ const validateConfig = (config: string): Promise<any> => {
   return validate(filename)
 }
 
-const orb = 'cypress-io/cypress@dev:custom-command-17'
+const orb = 'cypress-io/cypress@0.6.0'
 
 test('simple', t => {
   t.plan(0)
