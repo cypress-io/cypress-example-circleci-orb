@@ -64,6 +64,23 @@ test('build and start commands', t => {
   return validateConfig(config)
 })
 
+test('custom cypress run command', t => {
+  t.plan(0)
+  const config = stripIndent`
+    # simple example workflow
+    version: 2.1
+    orbs:
+      cypress: ${orb}
+    workflows:
+      build:
+        jobs:
+          # checks out code and installs dependencies once
+          - cypress/run:
+              command: 'npm run cy:run -- --record false'
+  `
+  return validateConfig(config)
+})
+
 test('two jobs with parallel tests', t => {
   t.plan(0)
   const config = stripIndent`
