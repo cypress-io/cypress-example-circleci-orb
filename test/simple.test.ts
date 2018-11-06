@@ -13,13 +13,15 @@ const validateConfig = (config: string): Promise<any> => {
   return validate(filename)
 }
 
+const orb = 'cypress-io/cypress@dev:custom-command-17'
+
 test('simple', t => {
   t.plan(0)
   const config = stripIndent`
     # simple example workflow
     version: 2.1
     orbs:
-      cypress: cypress-io/cypress@0.5.0
+      cypress: ${orb}
     workflows:
       build:
         jobs:
@@ -34,7 +36,7 @@ test('chrome browser', t => {
     # simple example workflow
     version: 2.1
     orbs:
-      cypress: cypress-io/cypress@0.5.0
+      cypress: ${orb}
     workflows:
       build:
         jobs:
@@ -51,7 +53,7 @@ test('build and start commands', t => {
     # simple example workflow
     version: 2.1
     orbs:
-      cypress: cypress-io/cypress@0.5.0
+      cypress: ${orb}
     workflows:
       build:
         jobs:
@@ -68,7 +70,7 @@ test('two jobs with parallel tests', t => {
     # simple example workflow
     version: 2.1
     orbs:
-      cypress: cypress-io/cypress@0.5.0
+      cypress: ${orb}
     workflows:
       build:
         jobs:

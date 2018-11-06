@@ -34,32 +34,32 @@ orbs:
 #           spec: "cypress/integration/*-b.js"
 
 # custom cypress run command
-# workflows:
-#   build:
-#     jobs:
-#       # checks out code and installs dependencies once
-#       - cypress/install:
-#           build: 'npm run build'
-#       - cypress/run:
-#           requires:
-#             - cypress/install
-#           command: 'npm run cy:run -- --record false'
-
-# realistic case: install in 1 job,
-# run tests in parallel on several machines after that
 workflows:
   build:
     jobs:
       # checks out code and installs dependencies once
       - cypress/install:
           build: 'npm run build'
-      # runs on 3 machines, load balances tests
-      # and records on Cypress Dashboard
       - cypress/run:
           requires:
             - cypress/install
-          record: true
-          parallel: true
-          parallelism: 3
-          group: '3x'
-          start: 'npm run server'
+          command: 'npm run cy:run -- --record false'
+
+# realistic case: install in 1 job,
+# run tests in parallel on several machines after that
+# workflows:
+#   build:
+#     jobs:
+#       # checks out code and installs dependencies once
+#       - cypress/install:
+#           build: 'npm run build'
+#       # runs on 3 machines, load balances tests
+#       # and records on Cypress Dashboard
+#       - cypress/run:
+#           requires:
+#             - cypress/install
+#           record: true
+#           parallel: true
+#           parallelism: 3
+#           group: '3x'
+#           start: 'npm run server'
