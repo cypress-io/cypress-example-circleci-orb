@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run unit",
     "validate": "circleci config validate .circleci/config.yml",
     "process": "circleci config process .circleci/config.yml",
     "build": "echo building app 😃",
-    "server": "node ./server"
+    "server": "node ./server",
+    "unit": "ava-ts --verbose 'test/*.test.ts'",
+    "cy:run": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -22,12 +24,23 @@
   },
   "homepage": "https://github.com/cypress-io/cypress-example-circleci-orb#readme",
   "devDependencies": {
+    "@types/common-tags": "1.4.0",
+    "@types/execa": "0.9.0",
+    "@types/node": "10.12.2",
+    "@types/temp-write": "3.3.0",
+    "ava": "0.25.0",
+    "ava-ts": "0.25.2",
     "cypress": "3.1.0",
-    "husky": "1.1.2"
+    "execa": "1.0.0",
+    "husky": "1.1.2",
+    "js-yaml": "3.12.0",
+    "temp-write": "3.4.0",
+    "ts-node": "7.0.1",
+    "typescript": "3.1.6"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run validate"
+      "pre-commit": "npm run validate && npm run unit"
     }
   }
 }
