@@ -38,11 +38,7 @@ workflows:
   build:
     jobs:
       # checks out code and installs dependencies once
-      - cypress/install:
-          build: 'npm run build'
       - cypress/run:
-          requires:
-            - cypress/install
           command: 'npm run cy:run -- --record false'
 
 # realistic case: install in 1 job,
