@@ -9,7 +9,8 @@
     "process": "circleci config process .circleci/config.yml",
     "build": "echo building app 😃",
     "server": "node ./server",
-    "unit": "ava-ts --verbose 'test/*.test.ts'"
+    "unit": "ava-ts --verbose 'test/*.test.ts'",
+    "cy:run": "cypress run"
   },
   "repository": {
     "type": "git",

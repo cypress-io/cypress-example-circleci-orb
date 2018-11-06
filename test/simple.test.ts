@@ -4,7 +4,7 @@ import * as execa from 'execa'
 import * as tempWrite from 'temp-write'
 
 const validate = (filename: string): Promise<any> => {
-  const cmd = `circleci orb validate ${filename}`
+  const cmd = `circleci config validate ${filename}`
   return execa.shell(cmd, { stdio: 'inherit' })
 }
 
@@ -56,7 +56,7 @@ test('build and start commands', t => {
       build:
         jobs:
           - cypress/run:
-              builds: "npm run build"
+              build: "npm run build"
               start: "npm run server"
   `
   return validateConfig(config)
