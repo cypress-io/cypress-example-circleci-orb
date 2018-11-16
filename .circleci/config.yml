@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@0.6.0
+  cypress: cypress-io/cypress@1.0.1
 
 # simplest use case - do everything in a single job
 # workflows:
@@ -40,7 +40,6 @@ workflows:
       # checks out code and installs dependencies once
       - cypress/run:
           command: 'npm run cy:run -- --record false'
-
 # realistic case: install in 1 job,
 # run tests in parallel on several machines after that
 # workflows:
