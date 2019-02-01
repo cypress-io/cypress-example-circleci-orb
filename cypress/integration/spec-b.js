@@ -4,8 +4,5 @@ describe('spec b', () => {
   })
   it('waits a little', () => {
     cy.wait(10000)
-      .then(() => {
-        throw new Error('fail on purpose!')
-      })
   })
 })
