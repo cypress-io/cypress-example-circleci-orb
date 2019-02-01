@@ -1,8 +1,9 @@
 {
   "name": "cypress-example-circleci-orb",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example project that shows Cypress CircleCI Orb in action",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "npm run unit",
     "validate": "circleci config validate .circleci/config.yml",
