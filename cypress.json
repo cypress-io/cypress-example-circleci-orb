@@ -1,3 +1,7 @@
 {
-  "projectId": "j35334"
+  "projectId": "j35334",
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "cypress/results/results-[hash].xml"
+  }
 }

@@ -40,6 +40,9 @@ workflows:
       # checks out code and installs dependencies once
       - cypress/run:
           command: 'npm run cy:run -- --record false'
+          post-steps:
+            - store_test_results:
+                path: cypress/results
 # realistic case: install in 1 job,
 # run tests in parallel on several machines after that
 # workflows:
