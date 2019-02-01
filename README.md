@@ -1,8 +1,11 @@
 # Cypress CircleCI Orb Example
 
-[![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-circleci-orb.svg?style=svg&circle-token=35ff1103f3c44a79246edd491b0d92169e84976a)](https://circleci.com/gh/cypress-io/cypress-example-circleci-orb) [![Cypress Dashboard](https://img.shields.io/badge/cypress-dashboard-brightgreen.svg)](https://dashboard.cypress.io/#/projects/j35334/runs)
+[![CircleCI](https://circleci.com/gh/cypress-io/cypress-example-circleci-orb.svg?style=svg&circle-token=35ff1103f3c44a79246edd491b0d92169e84976a)](https://circleci.com/gh/cypress-io/cypress-example-circleci-orb) [![Cypress Dashboard](https://img.shields.io/badge/cypress-dashboard-brightgreen.svg)](https://dashboard.cypress.io/#/projects/j35334/runs) [![renovate-app badge][renovate-badge]][renovate-app]
 
 [Cypress CircleCI Orb](https://github.com/cypress-io/circleci-orb)
+
+[renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
+[renovate-app]: https://renovateapp.com/
 
 ## Introduction
 
