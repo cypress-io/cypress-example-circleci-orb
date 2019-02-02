@@ -37,7 +37,7 @@
     "js-yaml": "3.12.1",
     "temp-write": "3.4.0",
     "ts-node": "7.0.1",
-    "typescript": "3.1.6"
+    "typescript": "3.3.1"
   },
   "husky": {
     "hooks": {
