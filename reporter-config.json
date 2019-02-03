@@ -1,6 +1,0 @@
-{
-  "reporterEnabled": "mochawesome",
-  "reporterOptions": {
-    "mochaFile": "cypress/results/results-[hash].json"
-  }
-}
