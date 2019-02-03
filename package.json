@@ -15,8 +15,9 @@
     "delete:reports": "rm cypress/results/* || true",
     "prereport": "npm run delete:reports",
     "report": "cypress run --record false",
-    "postreport": "mochawesome-merge --reportDir cypress/results > mochawesome.json",
-    "postpostreport": "mochawesome-report-generator mochawesome.json"
+    "report:merge": "mochawesome-merge --reportDir cypress/results > mochawesome.json",
+    "report:generate": "mochawesome-report-generator mochawesome.json",
+    "postreport": "npm run report:merge && npm run report:generate"
   },
   "repository": {
     "type": "git",

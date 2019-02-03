@@ -43,6 +43,8 @@ workflows:
           post-steps:
             - store_test_results:
                 path: cypress/results
+            - store_artifacts:
+                path: mochawesome-report
 # realistic case: install in 1 job,
 # run tests in parallel on several machines after that
 # workflows:
