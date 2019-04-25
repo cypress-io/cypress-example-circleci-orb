@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1.5.1
+  cypress: cypress-io/cypress@1.7.0
 
 # simplest use case - do everything in a single job
 # workflows:
@@ -39,6 +39,9 @@ workflows:
     jobs:
       # checks out code and installs dependencies once
       - cypress/run:
+          # it is a single job, so no need to
+          # cache workspace (faster!)
+          no-workspace: true
           command: 'npm run report'
           post-steps:
             - store_test_results:
