@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1.7.0
+  # use latest 1.x.y version of the orb
+  # best practice is to use an exact version
+  cypress: cypress-io/cypress@1
 
 # simplest use case - do everything in a single job
 # workflows:
