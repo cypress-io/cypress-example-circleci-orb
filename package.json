@@ -34,7 +34,7 @@
   "devDependencies": {
     "@types/common-tags": "1.8.0",
     "@types/execa": "0.9.0",
-    "@types/node": "10.14.22",
+    "@types/node": "10.17.9",
     "@types/temp-write": "3.3.0",
     "ava": "1.4.1",
     "ava-ts": "0.25.2",
