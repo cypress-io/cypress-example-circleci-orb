@@ -62,6 +62,9 @@ workflows:
           no-workspace: true
           record: true
           browser: chrome
+          # before running tests, show if any environment variables
+          # starting with CYPRESS are set
+          build: npx has-env CYPRESS
 
 # realistic case: install in 1 job,
 # run tests in parallel on several machines after that
