@@ -4,6 +4,11 @@ orbs:
   # best practice is to use an exact version
   cypress: cypress-io/cypress@1
 
+executors:
+  chrome80-ff72:
+    docker:
+      - image: 'cypress/browsers:node13.6.0-chrome80-ff72'
+
 # simplest use case - do everything in a single job
 # workflows:
 #   build:
@@ -41,6 +46,7 @@ workflows:
     jobs:
       # checks out code and installs dependencies once
       - cypress/run:
+          name: Mochawesome report
           # it is a single job, so no need to
           # cache workspace (faster!)
           no-workspace: true
@@ -48,6 +54,15 @@ workflows:
           post-steps:
             - store_test_results:
                 path: cypress/results
+
+      # run tests inside Docker image with Chrome pre-installed
+      - cypress/run:
+          name: Chrome 80
+          executor: chrome80-ff72
+          no-workspace: true
+          record: true
+          browser: chrome
+
 # realistic case: install in 1 job,
 # run tests in parallel on several machines after that
 # workflows:
