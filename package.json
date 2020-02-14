@@ -39,7 +39,7 @@
     "@types/temp-write": "3.3.0",
     "ava": "1.4.1",
     "ava-ts": "0.25.2",
-    "cypress": "3.8.0",
+    "cypress": "3.8.3",
     "execa": "2.1.0",
     "husky": "2.7.0",
     "js-yaml": "3.13.1",
