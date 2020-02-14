@@ -37,7 +37,7 @@
     "@types/execa": "0.9.0",
     "@types/node": "10.17.9",
     "@types/temp-write": "3.3.0",
-    "ava": "1.4.1",
+    "ava": "2.4.0",
     "ava-ts": "0.25.2",
     "cypress": "3.8.0",
     "execa": "2.1.0",
