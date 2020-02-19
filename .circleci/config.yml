@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   # use latest 1.x.y version of the orb
   # best practice is to use an exact version
-  cypress: cypress-io/cypress@1
+  cypress: cypress-io/cypress@1.16.1
   node: circleci/node@1.1
 
 executors:
@@ -58,6 +58,7 @@ workflows:
   dependencies:
     jobs:
       - cypress/run:
+          name: test dependencies
           filters:
             branches:
               only: /renovate.*/
