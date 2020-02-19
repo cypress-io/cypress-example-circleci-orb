@@ -66,6 +66,8 @@ workflows:
           # cache workspace (faster!)
           no-workspace: true
           command: 'npm run report'
+          pre-steps:
+            - run: npm t
           post-steps:
             - store_test_results:
                 path: cypress/results
