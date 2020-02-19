@@ -60,7 +60,7 @@ workflows:
       - cypress/run:
           filters:
             branches:
-              only: /^renovate/
+              only: /renovate*/
           no-workspace: true
           tags: dependencies,renovate
 
