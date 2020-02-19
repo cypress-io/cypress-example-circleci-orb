@@ -62,6 +62,7 @@ workflows:
             branches:
               only: /^renovate/
           no-workspace: true
+          # tags: dependencies,renovate
 
   build:
     jobs:
