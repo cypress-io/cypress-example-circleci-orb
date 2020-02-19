@@ -58,9 +58,9 @@ workflows:
   dependencies:
     jobs:
       - cypress/run:
-          # filters:
-          #   branches:
-          #     only: /renovate*/
+          filters:
+            branches:
+              only: /renovate.*/
           no-workspace: true
           tags: dependencies,renovate
 
