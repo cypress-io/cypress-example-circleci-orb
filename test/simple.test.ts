@@ -5,7 +5,7 @@ import * as tempWrite from 'temp-write'
 
 const validate = (filename: string): Promise<any> => {
   const cmd = `circleci config validate ${filename}`
-  return execa.shell(cmd, { stdio: 'inherit' })
+  return execa(cmd, { stdio: 'inherit', shell: true })
 }
 
 const validateConfig = (config: string): Promise<any> => {
@@ -13,7 +13,7 @@ const validateConfig = (config: string): Promise<any> => {
   return validate(filename)
 }
 
-const orb = 'cypress-io/cypress@1.0.1'
+const orb = 'cypress-io/cypress@1.14.0'
 
 test('simple', t => {
   t.plan(0)

@@ -3,6 +3,7 @@ orbs:
   # use latest 1.x.y version of the orb
   # best practice is to use an exact version
   cypress: cypress-io/cypress@1
+  node: circleci/node@1.1
 
 executors:
   chrome80-ff72:
@@ -39,13 +40,45 @@ executors:
 #       - cypress/run:
 #           record: false
 #           spec: "cypress/integration/*-b.js"
+jobs:
+  unit:
+    executor:
+      name: node/default
+      tag: '12'
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm ci
+      - run: npm test
 
 # custom cypress run command
 workflows:
+  # a workflow to run on dependency updates with Renovate
+  dependencies:
+    jobs:
+      - cypress/run:
+          filters:
+            branches:
+              only: /^renovate/
+          no-workspace: true
+          tags: dependencies,renovate
+
   build:
     jobs:
+      # could not run unit tests on Circle, validating config files
+      # always caused an error:
+      # Error: Configuration version 2.1 requires the "Enable Pipelines" project setting.
+      # Enable pipelines under Project Settings -> Advanced Settings.
+      # In order to retrigger pipelines, you must push a new commit.
+      #
+      # - unit
+
       # checks out code and installs dependencies once
       - cypress/run:
+          filters:
+            branches:
+              ignore: /^renovate/
           name: Mochawesome report
           # it is a single job, so no need to
           # cache workspace (faster!)
@@ -57,6 +90,9 @@ workflows:
 
       # run tests inside Docker image with Chrome pre-installed
       - cypress/run:
+          filters:
+            branches:
+              ignore: /^renovate/
           name: Chrome 80
           executor: chrome80-ff72
           no-workspace: true
