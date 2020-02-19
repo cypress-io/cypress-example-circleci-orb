@@ -58,6 +58,7 @@ workflows:
   dependencies:
     jobs:
       - cypress/run:
+          name: test dependencies
           filters:
             branches:
               only: /renovate.*/
