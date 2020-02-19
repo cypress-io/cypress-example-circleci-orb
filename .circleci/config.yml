@@ -65,7 +65,13 @@ workflows:
 
   build:
     jobs:
-      - unit
+      # could not run unit tests on Circle, validating config files
+      # always caused an error:
+      # Error: Configuration version 2.1 requires the "Enable Pipelines" project setting.
+      # Enable pipelines under Project Settings -> Advanced Settings.
+      # In order to retrigger pipelines, you must push a new commit.
+      #
+      # - unit
 
       # checks out code and installs dependencies once
       - cypress/run:
