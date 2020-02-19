@@ -5,7 +5,7 @@ import * as tempWrite from 'temp-write'
 
 const validate = (filename: string): Promise<any> => {
   const cmd = `circleci config validate ${filename}`
-  return execa.shell(cmd, { stdio: 'inherit' })
+  return execa(cmd, { stdio: 'inherit', shell: true })
 }
 
 const validateConfig = (config: string): Promise<any> => {

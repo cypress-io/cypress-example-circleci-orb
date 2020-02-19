@@ -42,10 +42,25 @@ executors:
 
 # custom cypress run command
 workflows:
+  # a workflow to run on dependency updates with Renovate
+  dependencies:
+    jobs:
+      - cypress/run:
+          filters:
+            branches:
+              only: /^renovate/
+          no-workspace: true
+          # also run unit tests
+          pre-steps:
+            - run: npm t
+
   build:
     jobs:
       # checks out code and installs dependencies once
       - cypress/run:
+          filters:
+            branches:
+              ignore: /^renovate/
           name: Mochawesome report
           # it is a single job, so no need to
           # cache workspace (faster!)
@@ -57,6 +72,9 @@ workflows:
 
       # run tests inside Docker image with Chrome pre-installed
       - cypress/run:
+          filters:
+            branches:
+              ignore: /^renovate/
           name: Chrome 80
           executor: chrome80-ff72
           no-workspace: true
