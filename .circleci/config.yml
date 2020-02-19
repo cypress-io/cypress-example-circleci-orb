@@ -3,6 +3,7 @@ orbs:
   # use latest 1.x.y version of the orb
   # best practice is to use an exact version
   cypress: cypress-io/cypress@1
+  node: circleci/node@1.1
 
 executors:
   chrome80-ff72:
@@ -39,6 +40,17 @@ executors:
 #       - cypress/run:
 #           record: false
 #           spec: "cypress/integration/*-b.js"
+jobs:
+  unit:
+    executor:
+      name: node/default
+      tag: '12'
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm ci
+      - run: npm test
 
 # custom cypress run command
 workflows:
@@ -50,12 +62,11 @@ workflows:
             branches:
               only: /^renovate/
           no-workspace: true
-          # also run unit tests
-          pre-steps:
-            - run: npm t
 
   build:
     jobs:
+      - unit
+
       # checks out code and installs dependencies once
       - cypress/run:
           filters:
@@ -66,8 +77,6 @@ workflows:
           # cache workspace (faster!)
           no-workspace: true
           command: 'npm run report'
-          pre-steps:
-            - run: npm t
           post-steps:
             - store_test_results:
                 path: cypress/results
