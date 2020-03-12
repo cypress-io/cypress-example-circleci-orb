@@ -90,7 +90,7 @@ workflows:
 
       - cypress/install:
           name: Custom install command
-          install-command: 'npm ci --production'
+          install-command: 'npm ci'
 
       # checks out code and installs dependencies once
       - cypress/run:
