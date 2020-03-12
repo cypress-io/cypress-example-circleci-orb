@@ -92,6 +92,18 @@ workflows:
           name: Custom install command
           install-command: 'npm ci'
 
+      - cypress/run:
+          name: basic npm ci
+
+      - cypress/run:
+          executor: node12
+          name: Yarn install and run
+          yarn: true
+
+      - cypress/run:
+          name: Custom install command and run
+          install-command: 'npm ci'
+
       # checks out code and installs dependencies once
       - cypress/run:
           filters:
