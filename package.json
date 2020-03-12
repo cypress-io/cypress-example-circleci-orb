@@ -17,7 +17,7 @@
     "report": "cypress run --record false --reporter mocha-multi-reporters --reporter-options configFile=reporter-config.json"
   },
   "engines": {
-    "node": ">=10",
+    "node": ">=12",
     "npm": ">=6"
   },
   "repository": {
@@ -37,7 +37,7 @@
     "@types/execa": "0.9.0",
     "@types/node": "10.17.16",
     "@types/temp-write": "3.3.0",
-    "ava": "3.3.0",
+    "ava": "3.5.0",
     "ava-ts": "0.25.2",
     "cypress": "4.0.2",
     "execa": "2.1.0",
