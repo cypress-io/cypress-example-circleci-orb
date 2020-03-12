@@ -9,6 +9,9 @@ executors:
   chrome80-ff72:
     docker:
       - image: 'cypress/browsers:node13.6.0-chrome80-ff72'
+  node12:
+    docker:
+      - image: 'cypress/base:12.16.1'
 
 # simplest use case - do everything in a single job
 # workflows:
@@ -81,6 +84,7 @@ workflows:
           name: NPM CI install
 
       - cypress/install:
+          executor: node12
           name: Yarn install
           yarn: true
 
